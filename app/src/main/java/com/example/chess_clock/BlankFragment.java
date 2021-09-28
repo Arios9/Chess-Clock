@@ -11,22 +11,32 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class BlankFragment extends Fragment {
 
     private GridView gridView;
     private View view;
+    private ArrayList<TimeButton> arrayList = new ArrayList<>();
 
-    static final String[] numbers = new String[] {
-            "A", "B", "C", "D", "E",
-            "F", "G", "H", "I", "J",
-            "K", "L", "M", "N", "O",
-            "P", "Q", "R", "S", "T",
-            "U", "V", "W", "X", "Y", "Z"};
-
-    private ArrayList<Button> arrayList = new ArrayList<>();
+    public static final ArrayList<TimeControl> timeControls = new ArrayList<>(
+            Arrays.asList(
+                    new TimeControl("Bullet",1,0),
+                    new TimeControl("Bullet",2,1),
+                    new TimeControl("Blitz",3,0),
+                    new TimeControl("Blitz",3,2),
+                    new TimeControl("Blitz",5,0),
+                    new TimeControl("Blitz",5,3),
+                    new TimeControl("Rapid",10,0),
+                    new TimeControl("Rapid",10,5),
+                    new TimeControl("Rapid",15,10),
+                    new TimeControl("Classical",30,0),
+                    new TimeControl("Classical",20,20)
+            )
+    );
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,19 +49,12 @@ public class BlankFragment extends Fragment {
     private void createButtons() {
         gridView = (GridView) view.findViewById(R.id.buttonGridView);
 
-        for (int i=0; i<9; i++){
-            int finalI = i;
-            Button button= new androidx.appcompat.widget.AppCompatButton(getContext()){
-                @Override
-                public String toString() {
-                    return String.valueOf("Bullet \n"+finalI);
-                }
-            };
+        for (TimeControl timeControl : timeControls){
+            TimeButton button= new TimeButton(getContext(), timeControl);
             arrayList.add(button);
         }
 
-        ArrayAdapter<Button> adapter = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_list_item_1, arrayList);
+        ButtonArrayAdapter adapter = new ButtonArrayAdapter(getContext(), arrayList);
 
         gridView.setAdapter(adapter);
     }

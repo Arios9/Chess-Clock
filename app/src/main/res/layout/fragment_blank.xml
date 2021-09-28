@@ -9,6 +9,8 @@
         android:id="@+id/buttonGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="3" />
+        android:numColumns="3"
+        android:verticalSpacing="20dp"
+        android:horizontalSpacing="10dp"/>
 
 </FrameLayout>

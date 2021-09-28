@@ -15,7 +15,7 @@ android:gravity="center">
     android:text="Time Controls"
     android:gravity="center"
     android:textSize="30dp"
-    android:layout_marginBottom="20dp" />
+    android:layout_marginBottom="30dp"/>
 
 <fragment
     android:id="@+id/fragment"
