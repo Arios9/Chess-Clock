@@ -34,7 +34,7 @@ public class BlankFragment extends Fragment {
                     new TimeControl("Rapid",10,5),
                     new TimeControl("Rapid",15,10),
                     new TimeControl("Classical",30,0),
-                    new TimeControl("Classical",20,20)
+                    new TimeControl("Classical",30,20)
             )
     );
 
