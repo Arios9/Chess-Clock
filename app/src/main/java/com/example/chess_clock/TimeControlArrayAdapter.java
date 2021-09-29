@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class ButtonArrayAdapter extends ArrayAdapter<TimeButton> {
-    public ButtonArrayAdapter(@NonNull Context context, ArrayList<TimeButton> resource) {
+public class TimeControlArrayAdapter extends ArrayAdapter<TimeControl> {
+    public TimeControlArrayAdapter(@NonNull Context context, ArrayList<TimeControl> resource) {
         super(context,0, resource);
     }
 
@@ -21,14 +21,13 @@ public class ButtonArrayAdapter extends ArrayAdapter<TimeButton> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if(convertView==null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.time_button, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.time_control, parent, false);
         }
 
         TextView time = convertView.findViewById(R.id.timeText);
         TextView type = convertView.findViewById(R.id.typeText);
 
-        TimeButton timeButton = getItem(position);
-        TimeControl timeControl = timeButton.getTimeControl();
+        TimeControl timeControl = getItem(position);
         time.setText(timeControl.getTime() + " + " +timeControl.getIncrement());
         type.setText(timeControl.getType());
 

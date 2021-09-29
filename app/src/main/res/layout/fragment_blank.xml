@@ -6,7 +6,7 @@
     tools:context=".BlankFragment">
 
     <GridView
-        android:id="@+id/buttonGridView"
+        android:id="@+id/timeControlsGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="3"

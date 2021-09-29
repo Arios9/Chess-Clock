@@ -7,11 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.GridView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -20,8 +17,6 @@ public class BlankFragment extends Fragment {
 
     private GridView gridView;
     private View view;
-    private ArrayList<TimeButton> arrayList = new ArrayList<>();
-
     public static final ArrayList<TimeControl> timeControls = new ArrayList<>(
             Arrays.asList(
                     new TimeControl("Bullet",1,0),
@@ -42,20 +37,13 @@ public class BlankFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_blank, container, false);
-        createButtons();
+        createGridViewItems();
         return view;
     }
 
-    private void createButtons() {
-        gridView = (GridView) view.findViewById(R.id.buttonGridView);
-
-        for (TimeControl timeControl : timeControls){
-            TimeButton button= new TimeButton(getContext(), timeControl);
-            arrayList.add(button);
-        }
-
-        ButtonArrayAdapter adapter = new ButtonArrayAdapter(getContext(), arrayList);
-
+    private void createGridViewItems() {
+        gridView = view.findViewById(R.id.timeControlsGridView);
+        TimeControlArrayAdapter adapter = new TimeControlArrayAdapter(getContext(), timeControls);
         gridView.setAdapter(adapter);
     }
 
