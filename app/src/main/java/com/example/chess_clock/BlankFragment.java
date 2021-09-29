@@ -1,5 +1,6 @@
 package com.example.chess_clock;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -51,7 +52,8 @@ public class BlankFragment extends Fragment {
     }
 
     private void createNewGame(Object itemAtPosition) {
-        
+        Intent intent = new Intent(getContext(), GameActivity.class);
+        startActivity(intent);
     }
 
 
