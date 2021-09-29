@@ -11,7 +11,8 @@
         android:theme="@style/Theme.ChessClock">
         <activity
             android:name=".GameActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
             android:name=".MainActivity"
