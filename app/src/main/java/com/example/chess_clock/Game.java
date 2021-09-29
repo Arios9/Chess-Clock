@@ -42,7 +42,7 @@ public class Game {
         int timeToSeconds = remainingTime/10;
         String minutes = String.valueOf(timeToSeconds/60);
         String seconds = String.valueOf(timeToSeconds%60/10) + String.valueOf(timeToSeconds%10);
-        String finalString = minutes + ":" + seconds;
+        String finalString = minutes + ":" + seconds + "." + remainingTime % 10;
         button.setText(finalString);
     }
 }
