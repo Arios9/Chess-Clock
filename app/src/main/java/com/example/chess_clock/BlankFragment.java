@@ -18,9 +18,10 @@ import java.util.Arrays;
 
 public class BlankFragment extends Fragment {
 
+    public static final String TIME_CONTROL_EXTRA_TEXT = "timeControlObject";
     private GridView gridView;
     private View view;
-    public static final ArrayList<TimeControl> timeControls = new ArrayList<>(
+    private static final ArrayList<TimeControl> timeControls = new ArrayList<>(
             Arrays.asList(
                     new TimeControl("Bullet",1,0),
                     new TimeControl("Bullet",2,1),
@@ -53,6 +54,7 @@ public class BlankFragment extends Fragment {
 
     private void createNewGame(Object itemAtPosition) {
         Intent intent = new Intent(getContext(), GameActivity.class);
+        intent.putExtra(TIME_CONTROL_EXTRA_TEXT, (TimeControl)itemAtPosition);
         startActivity(intent);
     }
 
