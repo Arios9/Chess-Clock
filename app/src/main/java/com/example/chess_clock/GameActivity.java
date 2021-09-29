@@ -14,7 +14,7 @@ import static com.example.chess_clock.BlankFragment.TIME_CONTROL_EXTRA_TEXT;
 
 public class GameActivity extends AppCompatActivity {
 
-    private ImageButton homeButton;
+    private ImageButton homeButton, startPauseButton;
     private Button button1, button2;
     private Game game;
 
@@ -32,6 +32,7 @@ public class GameActivity extends AppCompatActivity {
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
         homeButton = findViewById(R.id.imageButtonHome);
+        startPauseButton = findViewById(R.id.startPauseButton);
     }
 
     private void createNewGame() {
@@ -45,6 +46,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void addMenuButtonListeners() {
         homeButton.setOnClickListener(v -> createQuitDialog());
+        startPauseButton.setOnClickListener(v -> game.startPauseAction(startPauseButton));
     }
 
     private void createQuitDialog() {
