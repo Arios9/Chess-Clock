@@ -1,19 +1,39 @@
 package com.example.chess_clock;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity {
+
+//    private Game game;
+    private ImageButton homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         setOnSystemUiVisibilityChangeListener();
+        addMenuButtonListeners();
+    }
+
+    private void addMenuButtonListeners() {
+        homeButton = findViewById(R.id.imageButtonHome);
+        homeButton.setOnClickListener(v -> createQuitDialog());
+    }
+
+    private void createQuitDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Do you want to quit?");
+        builder.setPositiveButton("Yes", (dialog, id) -> finish());
+        builder.setNegativeButton("No", (dialog, id) -> {});
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void setOnSystemUiVisibilityChangeListener() {
