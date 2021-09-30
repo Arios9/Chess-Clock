@@ -5,9 +5,9 @@ import android.os.Parcelable;
 
 public class TimeControl implements Parcelable {
 
-    private String type;
-    private int time;
-    private int increment;
+    private final String type;
+    private final int time;
+    private final int increment;
 
     public TimeControl(String type, int time, int increment) {
         this.type = type;

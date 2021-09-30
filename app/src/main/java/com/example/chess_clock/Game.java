@@ -9,13 +9,13 @@ import java.util.TimerTask;
 
 public class Game {
 
-    private  TimeControl timeControl;
+    private final TimeControl timeControl;
     private int remainingTime1, remainingTime2;
     private boolean whiteToPlay = true;
     private boolean gameIsOn = false;
     private boolean gameOver = false;
     private Timer timer;
-    private GameActivity gameActivity;
+    private final GameActivity gameActivity;
 
     public Game(GameActivity gameActivity, TimeControl timeControl) {
         this.gameActivity = gameActivity;
@@ -30,8 +30,7 @@ public class Game {
             public void run() {
                 timeCalculate();
             }
-        },0, 100
-        );
+        },0, 100);
     }
 
     private void timeCalculate() {
@@ -62,16 +61,8 @@ public class Game {
         return gameIsOn;
     }
 
-    public void setGameIsOn(boolean gameIsOn) {
-        this.gameIsOn = gameIsOn;
-    }
-
     public TimeControl getTimeControl() {
         return timeControl;
-    }
-
-    public void setTimeControl(TimeControl timeControl) {
-        this.timeControl = timeControl;
     }
 
     public int getRemainingTime1() {
@@ -117,11 +108,8 @@ public class Game {
             timer.cancel();
             startPauseButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_72);
         }else {
-            if(isWhiteToPlay()){
-                gameActivity.getButton1().setBackgroundColor(Color.GREEN);
-            }else{
-                gameActivity.getButton2().setBackgroundColor(Color.GREEN);
-            }
+            if(isWhiteToPlay()) gameActivity.getButton1().setBackgroundColor(Color.GREEN);
+            else gameActivity.getButton2().setBackgroundColor(Color.GREEN);
             createTimer();
             startPauseButton.setImageResource(R.drawable.ic_baseline_pause_circle_filled_72);
         }

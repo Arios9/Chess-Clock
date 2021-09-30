@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +17,6 @@ import java.util.Arrays;
 public class BlankFragment extends Fragment {
 
     public static final String TIME_CONTROL_EXTRA_TEXT = "timeControlObject";
-    private GridView gridView;
     private View view;
     private static final ArrayList<TimeControl> timeControls = new ArrayList<>(
             Arrays.asList(
@@ -46,7 +43,7 @@ public class BlankFragment extends Fragment {
     }
 
     private void createGridViewItems() {
-        gridView = view.findViewById(R.id.timeControlsGridView);
+        GridView gridView = view.findViewById(R.id.timeControlsGridView);
         TimeControlArrayAdapter adapter = new TimeControlArrayAdapter(getContext(), timeControls);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener((parent, view, position, id) -> createNewGame(parent.getItemAtPosition(position)));
