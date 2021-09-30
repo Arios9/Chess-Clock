@@ -1,7 +1,11 @@
 package com.example.chess_clock;
 
+import android.graphics.Color;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Game {
 
@@ -9,11 +13,49 @@ public class Game {
     private int remainingTime1, remainingTime2;
     private boolean whiteToPlay = true;
     private boolean gameIsOn = false;
+    private boolean gameOver = false;
+    private Timer timer;
+    private GameActivity gameActivity;
 
-    public Game(TimeControl timeControl) {
+    public Game(GameActivity gameActivity, TimeControl timeControl) {
+        this.gameActivity = gameActivity;
         this.timeControl = timeControl;
         this.remainingTime1 = timeControl.getTime()*(60*10);
         this.remainingTime2 = timeControl.getTime()*(60*10);
+    }
+
+    private void createTimer() {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                timeCalculate();
+            }
+        },0, 100
+        );
+    }
+
+    private void timeCalculate() {
+        if(whiteToPlay){
+            remainingTime1--;
+            setTimeTextOnTheButton(gameActivity.getButton1(), remainingTime1);
+            if(remainingTime1==0){
+                gameOver = true;
+                timer.cancel();
+                gameActivity.getButton1().setBackgroundColor(Color.RED);
+            }
+        }else{
+            remainingTime2--;
+            setTimeTextOnTheButton(gameActivity.getButton2(), remainingTime2);
+            if(remainingTime2==0){
+                gameOver = true;
+                timer.cancel();
+                gameActivity.getButton2().setBackgroundColor(Color.RED);
+            }
+        }
+    }
+
+    public Timer getTimer() {
+        return timer;
     }
 
     public boolean isGameIsOn() {
@@ -48,6 +90,17 @@ public class Game {
         this.remainingTime2 = remainingTime2;
     }
 
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public boolean isWhiteToPlay() {
+        return whiteToPlay;
+    }
+
+    public void setWhiteToPlay(boolean whiteToPlay) {
+        this.whiteToPlay = whiteToPlay;
+    }
 
     public void setTimeTextOnTheButton(Button button, int remainingTime) {
         int timeToSeconds = remainingTime/10;
@@ -59,9 +112,11 @@ public class Game {
 
     public void startPauseAction(ImageButton startPauseButton) {
         if(gameIsOn){
-            startPauseButton.setImageResource(R.drawable.ic_baseline_pause_circle_filled_72);
-        }else {
+            timer.cancel();
             startPauseButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_72);
+        }else {
+            createTimer();
+            startPauseButton.setImageResource(R.drawable.ic_baseline_pause_circle_filled_72);
         }
         gameIsOn = !gameIsOn;
     }
