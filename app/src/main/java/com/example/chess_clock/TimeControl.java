@@ -37,24 +37,12 @@ public class TimeControl implements Parcelable {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public int getTime() {
         return time;
     }
 
-    public void setTime(int time) {
-        this.time = time;
-    }
-
     public int getIncrement() {
         return increment;
-    }
-
-    public void setIncrement(int increment) {
-        this.increment = increment;
     }
 
     @Override

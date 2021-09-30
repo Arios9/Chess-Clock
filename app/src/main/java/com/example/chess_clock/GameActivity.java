@@ -30,27 +30,21 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void playButtonListeners() {
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(game.isGameOver())return;
-                if(!game.isGameIsOn())return;
-                if(!game.isWhiteToPlay())return;
-                game.setWhiteToPlay(false);
-                game.setRemainingTime1(game.getRemainingTime1()+10*game.getTimeControl().getIncrement());
-                game.setTimeTextOnTheButton(button1, game.getRemainingTime1());
-            }
+        button1.setOnClickListener(v -> {
+            if(game.isGameOver())return;
+            if(!game.isGameIsOn())return;
+            if(!game.isWhiteToPlay())return;
+            game.setWhiteToPlay(false);
+            game.setRemainingTime1(game.getRemainingTime1()+10*game.getTimeControl().getIncrement());
+            game.setTimeTextOnTheButton(button1, game.getRemainingTime1());
         });
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(game.isGameOver())return;
-                if(!game.isGameIsOn())return;
-                if(game.isWhiteToPlay())return;
-                game.setWhiteToPlay(true);
-                game.setRemainingTime2(game.getRemainingTime2()+10*game.getTimeControl().getIncrement());
-                game.setTimeTextOnTheButton(button2, game.getRemainingTime2());
-            }
+        button2.setOnClickListener(v -> {
+            if(game.isGameOver())return;
+            if(!game.isGameIsOn())return;
+            if(game.isWhiteToPlay())return;
+            game.setWhiteToPlay(true);
+            game.setRemainingTime2(game.getRemainingTime2()+10*game.getTimeControl().getIncrement());
+            game.setTimeTextOnTheButton(button2, game.getRemainingTime2());
         });
     }
 
