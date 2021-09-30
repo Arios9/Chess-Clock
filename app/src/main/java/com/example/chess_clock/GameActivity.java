@@ -3,6 +3,7 @@ package com.example.chess_clock;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -37,6 +38,8 @@ public class GameActivity extends AppCompatActivity {
             game.setWhiteToPlay(false);
             game.setRemainingTime1(game.getRemainingTime1()+10*game.getTimeControl().getIncrement());
             game.setTimeTextOnTheButton(button1, game.getRemainingTime1());
+            button2.setBackgroundColor(Color.GREEN);
+            button1.setBackgroundColor(Color.LTGRAY);
         });
         button2.setOnClickListener(v -> {
             if(game.isGameOver())return;
@@ -45,6 +48,8 @@ public class GameActivity extends AppCompatActivity {
             game.setWhiteToPlay(true);
             game.setRemainingTime2(game.getRemainingTime2()+10*game.getTimeControl().getIncrement());
             game.setTimeTextOnTheButton(button2, game.getRemainingTime2());
+            button1.setBackgroundColor(Color.GREEN);
+            button2.setBackgroundColor(Color.LTGRAY);
         });
     }
 
@@ -83,9 +88,11 @@ public class GameActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Do you want to restart?");
         builder.setPositiveButton("Yes", (dialog, id) -> {
-            game.getTimer().cancel();
+            if(game.getTimer() != null) game.getTimer().cancel();
             createNewGame();
             startPauseButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_72);
+            button1.setBackgroundColor(Color.LTGRAY);
+            button2.setBackgroundColor(Color.LTGRAY);
         });
         builder.setNegativeButton("No", (dialog, id) -> {});
         AlertDialog dialog = builder.create();
