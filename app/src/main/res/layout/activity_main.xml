@@ -19,7 +19,7 @@ android:gravity="center">
 
 <fragment
     android:id="@+id/fragment"
-    android:name="com.example.chess_clock.BlankFragment"
+    android:name="com.example.chess_clock.TimeControlFragment"
     android:layout_width="match_parent"
     android:layout_height="600dp" />
 

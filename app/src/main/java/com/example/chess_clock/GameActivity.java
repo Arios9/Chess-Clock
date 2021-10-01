@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import static com.example.chess_clock.BlankFragment.TIME_CONTROL_EXTRA_TEXT;
+import static com.example.chess_clock.TimeControlFragment.TIME_CONTROL_EXTRA_TEXT;
 
 public class GameActivity extends AppCompatActivity {
 

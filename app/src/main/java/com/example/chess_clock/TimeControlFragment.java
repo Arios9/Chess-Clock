@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class BlankFragment extends Fragment {
+public class TimeControlFragment extends Fragment {
 
     public static final String TIME_CONTROL_EXTRA_TEXT = "timeControlObject";
     private View view;
@@ -37,7 +37,7 @@ public class BlankFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_blank, container, false);
+        view = inflater.inflate(R.layout.time_control_fragment, container, false);
         createGridViewItems();
         return view;
     }
