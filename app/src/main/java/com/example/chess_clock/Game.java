@@ -10,8 +10,7 @@ import java.util.TimerTask;
 public class Game {
 
     private final TimeControl timeControl;
-    private int remainingTime1, remainingTime2;
-    private Button activatedButton;
+    private Player activatePlayer;
     private boolean gameIsOn = false;
     private boolean gameOver = false;
     private Timer timer;
@@ -20,38 +19,15 @@ public class Game {
     public Game(GameActivity gameActivity, TimeControl timeControl) {
         this.gameActivity = gameActivity;
         this.timeControl = timeControl;
-        this.remainingTime1 = timeControl.getTime()*(60*10);
-        this.remainingTime2 = timeControl.getTime()*(60*10);
-        this.activatedButton = gameActivity.getButton1();
     }
 
     private void createTimer() {
         timer = new Timer();
         timer.schedule(new TimerTask() {
             public void run() {
-                timeCalculate();
+                activatePlayer.timeCalculate();
             }
         },0, 100);
-    }
-
-    private void timeCalculate() {
-        if(activatedButton.equals(gameActivity.getButton1())){
-            remainingTime1--;
-            setTimeTextOnTheButton(gameActivity.getButton1(), remainingTime1);
-            if(remainingTime1==0){
-                gameOver = true;
-                timer.cancel();
-                gameActivity.getButton1().setBackgroundColor(Color.RED);
-            }
-        }else{
-            remainingTime2--;
-            setTimeTextOnTheButton(gameActivity.getButton2(), remainingTime2);
-            if(remainingTime2==0){
-                gameOver = true;
-                timer.cancel();
-                gameActivity.getButton2().setBackgroundColor(Color.RED);
-            }
-        }
     }
 
     public Timer getTimer() {
@@ -66,40 +42,16 @@ public class Game {
         return timeControl;
     }
 
-    public int getRemainingTime1() {
-        return remainingTime1;
-    }
-
-    public void setRemainingTime1(int remainingTime1) {
-        this.remainingTime1 = remainingTime1;
-    }
-
-    public int getRemainingTime2() {
-        return remainingTime2;
-    }
-
-    public void setRemainingTime2(int remainingTime2) {
-        this.remainingTime2 = remainingTime2;
-    }
-
     public boolean isGameOver() {
         return gameOver;
     }
 
-    public Button getActivatedButton() {
-        return activatedButton;
+    public Player getActivatePlayer() {
+        return activatePlayer;
     }
 
-    public void setActivatedButton(Button activatedButton) {
-        this.activatedButton = activatedButton;
-    }
-
-    public void setTimeTextOnTheButton(Button button, int remainingTime) {
-        int timeToSeconds = remainingTime/10;
-        String minutes = String.valueOf(timeToSeconds/60);
-        String seconds = String.valueOf(timeToSeconds%60/10) + String.valueOf(timeToSeconds%10);
-        String finalString = minutes + ":" + seconds + "." + remainingTime % 10;
-        button.setText(finalString);
+    public void setActivatePlayer(Player activatePlayer) {
+        this.activatePlayer = activatePlayer;
     }
 
     public void startPauseAction(ImageButton startPauseButton) {
@@ -109,10 +61,25 @@ public class Game {
             timer.cancel();
             startPauseButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_72);
         }else {
-            activatedButton.setBackgroundColor(Color.GREEN);
+            activatePlayer.getPlayersButton().setBackgroundColor(Color.GREEN);
             createTimer();
             startPauseButton.setImageResource(R.drawable.ic_baseline_pause_circle_filled_72);
         }
         gameIsOn = !gameIsOn;
+    }
+
+    public void createPlayers() {
+        Player player1 = new Player(this, gameActivity.getButton1());
+        Player player2 = new Player(this, gameActivity.getButton2());
+        player1.setOpponent(player2);
+        player2.setOpponent(player1);
+        player1.addButtonListener();
+        player2.addButtonListener();
+        activatePlayer = player1;
+    }
+
+    public void gameOver() {
+        gameOver = true;
+        timer.cancel();
     }
 }

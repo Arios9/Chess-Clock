@@ -26,30 +26,6 @@ public class GameActivity extends AppCompatActivity {
         setButtons();
         createNewGame();
         addMenuButtonListeners();
-        playButtonListeners();
-    }
-
-    private void playButtonListeners() {
-        button1.setOnClickListener(v -> {
-            if(game.isGameOver())return;
-            if(!game.isGameIsOn())return;
-            if(!game.getActivatedButton().equals(button1))return;
-            game.setActivatedButton(button2);
-            game.setRemainingTime1(game.getRemainingTime1()+10*game.getTimeControl().getIncrement());
-            game.setTimeTextOnTheButton(button1, game.getRemainingTime1());
-            button2.setBackgroundColor(Color.GREEN);
-            button1.setBackgroundColor(Color.LTGRAY);
-        });
-        button2.setOnClickListener(v -> {
-            if(game.isGameOver())return;
-            if(!game.isGameIsOn())return;
-            if(!game.getActivatedButton().equals(button2))return;
-            game.setActivatedButton(button1);
-            game.setRemainingTime2(game.getRemainingTime2()+10*game.getTimeControl().getIncrement());
-            game.setTimeTextOnTheButton(button2, game.getRemainingTime2());
-            button1.setBackgroundColor(Color.GREEN);
-            button2.setBackgroundColor(Color.LTGRAY);
-        });
     }
 
     private void setButtons() {
@@ -72,8 +48,7 @@ public class GameActivity extends AppCompatActivity {
         if(getIntent().hasExtra(TIME_CONTROL_EXTRA_TEXT)){
             TimeControl timeControl = getIntent().getParcelableExtra(TIME_CONTROL_EXTRA_TEXT);
             game = new Game(this, timeControl);
-            game.setTimeTextOnTheButton(button1, game.getRemainingTime1());
-            game.setTimeTextOnTheButton(button2, game.getRemainingTime2());
+            game.createPlayers();
         }
     }
 
