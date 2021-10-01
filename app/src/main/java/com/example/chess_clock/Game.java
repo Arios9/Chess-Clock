@@ -27,7 +27,7 @@ public class Game {
             public void run() {
                 activatePlayer.timeCalculate();
             }
-        },0, 10);
+        },0, 100);
     }
 
     public Timer getTimer() {
