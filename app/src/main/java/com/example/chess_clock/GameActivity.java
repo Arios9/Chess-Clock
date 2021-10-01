@@ -10,6 +10,8 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.function.Consumer;
+
 import static com.example.chess_clock.TimeControlFragment.TIME_CONTROL_EXTRA_TEXT;
 
 public class GameActivity extends AppCompatActivity {
@@ -59,23 +61,22 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void createRestartDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Do you want to restart?");
-        builder.setPositiveButton("Yes", (dialog, id) -> {
+        createDialog(() -> {
             if(game.getTimer() != null) game.getTimer().cancel();
             disableButton(game.getActivatePlayer().getPlayersButton());
             createNewGame();
             startPauseButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_72);
-        });
-        builder.setNegativeButton("No", (dialog, id) -> {});
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        }, "Do you want to restart?");
     }
 
     private void createQuitDialog() {
+        createDialog(() -> finish(), "Do you want to quit?");
+    }
+
+    private void createDialog(Runnable runnable, String title){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Do you want to quit?");
-        builder.setPositiveButton("Yes", (dialog, id) -> finish());
+        builder.setTitle(title);
+        builder.setPositiveButton("Yes", (dialog, id) -> runnable.run());
         builder.setNegativeButton("No", (dialog, id) -> {});
         AlertDialog dialog = builder.create();
         dialog.show();
