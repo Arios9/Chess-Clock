@@ -1,7 +1,5 @@
 package com.example.chess_clock;
 
-import android.graphics.Color;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.util.Timer;

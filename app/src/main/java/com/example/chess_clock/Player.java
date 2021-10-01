@@ -5,8 +5,8 @@ import android.widget.Button;
 
 public class Player {
 
-    private Game game;
-    private Button playersButton;
+    private final Game game;
+    private final Button playersButton;
     private Player opponent;
     private int remainingTime;
 
