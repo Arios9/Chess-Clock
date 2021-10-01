@@ -63,10 +63,9 @@ public class GameActivity extends AppCompatActivity {
         builder.setTitle("Do you want to restart?");
         builder.setPositiveButton("Yes", (dialog, id) -> {
             if(game.getTimer() != null) game.getTimer().cancel();
+            game.getActivatePlayer().getPlayersButton().setBackgroundColor(Color.LTGRAY);
             createNewGame();
             startPauseButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_72);
-            button1.setBackgroundColor(Color.LTGRAY);
-            button2.setBackgroundColor(Color.LTGRAY);
         });
         builder.setNegativeButton("No", (dialog, id) -> {});
         AlertDialog dialog = builder.create();

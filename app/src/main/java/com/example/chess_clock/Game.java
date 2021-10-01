@@ -56,8 +56,7 @@ public class Game {
 
     public void startPauseAction(ImageButton startPauseButton) {
         if(gameIsOn){
-            gameActivity.getButton1().setBackgroundColor(Color.LTGRAY);
-            gameActivity.getButton2().setBackgroundColor(Color.LTGRAY);
+            activatePlayer.getPlayersButton().setBackgroundColor(Color.LTGRAY);
             timer.cancel();
             startPauseButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_72);
         }else {
