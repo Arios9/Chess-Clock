@@ -27,7 +27,7 @@ public class Game {
             public void run() {
                 activatePlayer.timeCalculate();
             }
-        },0, 100);
+        },0, 10);
     }
 
     public Timer getTimer() {
@@ -59,6 +59,7 @@ public class Game {
     }
 
     public void startPauseAction(ImageButton startPauseButton) {
+        if(gameOver) return;
         if(gameIsOn){
             gameActivity.disableButton(activatePlayer.getPlayersButton());
             timer.cancel();
