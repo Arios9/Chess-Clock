@@ -49,8 +49,8 @@ public class Player {
             game.setActivatePlayer(opponent);
             remainingTime += 10*game.getTimeControl().getIncrement();
             setTimeTextOnTheButton();
-            opponent.getPlayersButton().setBackgroundColor(Color.GREEN);
-            playersButton.setBackgroundColor(Color.LTGRAY);
+            game.getGameActivity().enableButton(opponent.getPlayersButton());
+            game.getGameActivity().disableButton(playersButton);
         });
         setTimeTextOnTheButton();
     }

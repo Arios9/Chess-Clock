@@ -63,7 +63,7 @@ public class GameActivity extends AppCompatActivity {
         builder.setTitle("Do you want to restart?");
         builder.setPositiveButton("Yes", (dialog, id) -> {
             if(game.getTimer() != null) game.getTimer().cancel();
-            game.getActivatePlayer().getPlayersButton().setBackgroundColor(Color.LTGRAY);
+            disableButton(game.getActivatePlayer().getPlayersButton());
             createNewGame();
             startPauseButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_72);
         });
@@ -105,5 +105,14 @@ public class GameActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
+    public void enableButton(Button button) {
+        button.setBackgroundColor(Color.BLUE);
+        button.setTextColor(Color.WHITE);
+    }
+
+    public void disableButton(Button button) {
+        button.setBackgroundColor(Color.LTGRAY);
+        button.setTextColor(Color.BLACK);
+    }
 
 }

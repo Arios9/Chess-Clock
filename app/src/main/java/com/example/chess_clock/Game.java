@@ -54,13 +54,17 @@ public class Game {
         this.activatePlayer = activatePlayer;
     }
 
+    public GameActivity getGameActivity() {
+        return gameActivity;
+    }
+
     public void startPauseAction(ImageButton startPauseButton) {
         if(gameIsOn){
-            activatePlayer.getPlayersButton().setBackgroundColor(Color.LTGRAY);
+            gameActivity.disableButton(activatePlayer.getPlayersButton());
             timer.cancel();
             startPauseButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_72);
         }else {
-            activatePlayer.getPlayersButton().setBackgroundColor(Color.GREEN);
+            gameActivity.enableButton(activatePlayer.getPlayersButton());
             createTimer();
             startPauseButton.setImageResource(R.drawable.ic_baseline_pause_circle_filled_72);
         }
