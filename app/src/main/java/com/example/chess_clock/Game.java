@@ -11,7 +11,7 @@ public class Game {
 
     private final TimeControl timeControl;
     private int remainingTime1, remainingTime2;
-    private boolean whiteToPlay = true;
+    private Button activatedButton;
     private boolean gameIsOn = false;
     private boolean gameOver = false;
     private Timer timer;
@@ -22,6 +22,7 @@ public class Game {
         this.timeControl = timeControl;
         this.remainingTime1 = timeControl.getTime()*(60*10);
         this.remainingTime2 = timeControl.getTime()*(60*10);
+        this.activatedButton = gameActivity.getButton1();
     }
 
     private void createTimer() {
@@ -34,7 +35,7 @@ public class Game {
     }
 
     private void timeCalculate() {
-        if(whiteToPlay){
+        if(activatedButton.equals(gameActivity.getButton1())){
             remainingTime1--;
             setTimeTextOnTheButton(gameActivity.getButton1(), remainingTime1);
             if(remainingTime1==0){
@@ -85,12 +86,12 @@ public class Game {
         return gameOver;
     }
 
-    public boolean isWhiteToPlay() {
-        return whiteToPlay;
+    public Button getActivatedButton() {
+        return activatedButton;
     }
 
-    public void setWhiteToPlay(boolean whiteToPlay) {
-        this.whiteToPlay = whiteToPlay;
+    public void setActivatedButton(Button activatedButton) {
+        this.activatedButton = activatedButton;
     }
 
     public void setTimeTextOnTheButton(Button button, int remainingTime) {
@@ -108,8 +109,7 @@ public class Game {
             timer.cancel();
             startPauseButton.setImageResource(R.drawable.ic_baseline_play_circle_filled_72);
         }else {
-            if(isWhiteToPlay()) gameActivity.getButton1().setBackgroundColor(Color.GREEN);
-            else gameActivity.getButton2().setBackgroundColor(Color.GREEN);
+            activatedButton.setBackgroundColor(Color.GREEN);
             createTimer();
             startPauseButton.setImageResource(R.drawable.ic_baseline_pause_circle_filled_72);
         }

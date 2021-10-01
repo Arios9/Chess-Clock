@@ -33,8 +33,8 @@ public class GameActivity extends AppCompatActivity {
         button1.setOnClickListener(v -> {
             if(game.isGameOver())return;
             if(!game.isGameIsOn())return;
-            if(!game.isWhiteToPlay())return;
-            game.setWhiteToPlay(false);
+            if(!game.getActivatedButton().equals(button1))return;
+            game.setActivatedButton(button2);
             game.setRemainingTime1(game.getRemainingTime1()+10*game.getTimeControl().getIncrement());
             game.setTimeTextOnTheButton(button1, game.getRemainingTime1());
             button2.setBackgroundColor(Color.GREEN);
@@ -43,8 +43,8 @@ public class GameActivity extends AppCompatActivity {
         button2.setOnClickListener(v -> {
             if(game.isGameOver())return;
             if(!game.isGameIsOn())return;
-            if(game.isWhiteToPlay())return;
-            game.setWhiteToPlay(true);
+            if(!game.getActivatedButton().equals(button2))return;
+            game.setActivatedButton(button1);
             game.setRemainingTime2(game.getRemainingTime2()+10*game.getTimeControl().getIncrement());
             game.setTimeTextOnTheButton(button2, game.getRemainingTime2());
             button1.setBackgroundColor(Color.GREEN);
